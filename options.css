@@ -1,0 +1,271 @@
+/* src/options/options.css — options/library surface. Owned by: SURFACE.
+ * Full-tab layout: sticky brand bar, readable main column, and the
+ * #pf-monetization rail reserved for the Phase 5 monetization sidebar
+ * (empty until then — :empty collapses it without a trace). */
+
+.pf-options { min-height: 100vh; }
+
+.pf-options .pf-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--pf-card);
+}
+
+.pf-page {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pf-space-6);
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: var(--pf-space-6) var(--pf-space-5) var(--pf-space-8);
+}
+.pf-options .pf-main {
+  flex: 1 1 720px;
+  min-width: 0;
+  max-width: 760px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pf-options .pf-card { margin-bottom: 0; }
+.pf-options .pf-main > * + * { margin-top: var(--pf-space-4); }
+
+/* Phase 5 mount point: the monetization sidebar installs here. */
+.pf-monetization {
+  flex: 0 0 300px;
+  position: sticky;
+  top: 76px;
+  /* Token bridge: zovo-sidebar.css reads --zovo-* tokens (engine template);
+     map them onto this extension's hue-253 pf- tokens so the rail matches. */
+  --zovo-accent: var(--pf-primary-strong);
+  --zovo-surface: var(--pf-card);
+  --zovo-border: var(--pf-border);
+  --zovo-text: var(--pf-text);
+  --zovo-muted: var(--pf-text-secondary);
+  --zovo-gold: var(--pf-pro-gold);
+}
+.pf-monetization:empty { display: none; }
+.pf-monetization .zovo-sidebar { width: 100%; }
+/* a11y: template dims pro-card text via opacity (white × .8-.85 over the hue-253
+   accent gradient ≈ 3.3:1 — fails WCAG AA). Solid white is ≥5.2:1 on both
+   gradient stops (#4A63D2 / #5646d6), so restore full opacity here. Scoped to
+   the pro card only; the light "More tools" card keeps the template look. */
+.pf-monetization .zs-card--pro .zs-eyebrow { opacity: 1; }
+.pf-monetization .zs-card--pro .zs-sub { color: #fff; opacity: 1; }
+
+@media (max-width: 900px) {
+  .pf-page { flex-direction: column; }
+  .pf-options .pf-main { max-width: none; width: 100%; }
+  .pf-monetization { position: static; width: 100%; flex-basis: auto; }
+}
+
+/* ---- Page head ---------------------------------------------------------- */
+.pf-page-head { margin-bottom: var(--pf-space-1); }
+.pf-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.pf-page-sub {
+  margin: 0;
+  font-size: 13px;
+  color: var(--pf-text-secondary);
+}
+
+/* ---- Library tools --------------------------------------------------------- */
+.pf-library-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: var(--pf-space-3);
+}
+.pf-searchwrap { position: relative; }
+.pf-searchwrap-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  color: var(--pf-text-secondary);
+  pointer-events: none;
+}
+.pf-search-input { padding-left: 34px; }
+.pf-tools-row {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-space-3);
+}
+.pf-filters { display: flex; gap: 6px; }
+.pf-chip {
+  font: inherit;
+  font-size: var(--pf-fs-caption);
+  font-weight: var(--pf-fw-medium);
+  color: var(--pf-text-secondary);
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius-pill);
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background var(--pf-transition), color var(--pf-transition),
+              border-color var(--pf-transition);
+}
+.pf-chip:hover { border-color: var(--pf-border-strong); color: var(--pf-text); }
+.pf-chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--pf-card), 0 0 0 4px var(--pf-focus);
+}
+.pf-chip[aria-pressed='true'] {
+  color: var(--pf-on-primary);
+  background: var(--pf-primary-strong);
+  border-color: var(--pf-primary-strong);
+}
+.pf-lib-count {
+  margin-left: auto;
+  font-size: var(--pf-fs-caption);
+  color: var(--pf-text-secondary);
+  white-space: nowrap;
+}
+.pf-lib-count:empty { display: none; }
+
+/* ---- Library table --------------------------------------------------------- */
+.pf-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius-btn);
+  margin-bottom: var(--pf-space-4);
+}
+.pf-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  table-layout: fixed;
+}
+.pf-table thead th {
+  font-size: 10.5px;
+  font-weight: var(--pf-fw-heading);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pf-text-secondary);
+  text-align: left;
+  padding: 8px 10px;
+  background: var(--pf-surface);
+  border-bottom: 1px solid var(--pf-border);
+  white-space: nowrap;
+}
+.pf-col-status { width: 30px; }
+.pf-col-title  { width: 24%; }
+.pf-col-doi    { width: 19%; }
+.pf-col-journal { width: 16%; }
+.pf-col-year   { width: 48px; }
+.pf-col-host   { width: 13%; }
+.pf-col-date   { width: 82px; }
+.pf-col-actions { width: 96px; }
+
+.pf-table tbody td {
+  padding: 7px 10px;
+  border-top: 1px solid var(--pf-border);
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pf-table tbody tr:first-child td { border-top: none; }
+.pf-table tbody tr { transition: background var(--pf-transition); }
+.pf-table tbody tr:hover { background: var(--pf-surface); }
+
+.pf-cell-status { padding-right: 0; }
+.pf-row-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pf-border-strong);
+}
+.pf-row[data-found="true"] .pf-row-dot { background: var(--pf-success); }
+.pf-row-title { font-weight: var(--pf-fw-medium); color: var(--pf-text); }
+.pf-row-doi { color: var(--pf-text-secondary); font-size: 11.5px; }
+.pf-cell-journal, .pf-cell-host { color: var(--pf-text-secondary); }
+.pf-cell-year, .pf-cell-date { color: var(--pf-text-secondary); font-variant-numeric: tabular-nums; }
+.pf-cell-actions { overflow: visible; }
+.pf-cell-actions { white-space: nowrap; }
+.pf-cell-actions .pf-iconbtn { margin-right: 2px; }
+.pf-cell-actions .pf-iconbtn:last-child { margin-right: 0; }
+
+@media (max-width: 720px) {
+  .pf-col-journal, .pf-cell-journal,
+  .pf-col-host, .pf-cell-host { display: none; }
+}
+
+/* ---- Library actions ---------------------------------------------------------- */
+.pf-library-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pf-space-2);
+}
+.pf-library-actions .pf-btn--danger-text { margin-left: auto; }
+@media (max-width: 560px) {
+  .pf-library-actions .pf-btn--danger-text { margin-left: 0; }
+}
+
+/* ---- License card ---------------------------------------------------------------- */
+.pf-license-row { display: flex; gap: var(--pf-space-2); margin-top: var(--pf-space-2); }
+.pf-license-row .pf-input { flex: 1; }
+.pf-license-state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 0;
+  color: var(--pf-success-text);
+  font-weight: var(--pf-fw-medium);
+  font-size: 13px;
+}
+.pf-license-state svg { width: 16px; height: 16px; }
+.pf-license-upgrade { display: inline-block; margin-top: var(--pf-space-2); font-size: 13px; }
+
+/* ---- Grants card ------------------------------------------------------------------- */
+.pf-grants-hint { margin-top: 0; margin-bottom: var(--pf-space-3); }
+.pf-grants {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pf-grants:empty { display: none; }
+.pf-grant {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-space-2);
+  padding: 6px 0;
+}
+.pf-grant + .pf-grant { border-top: 1px solid var(--pf-border); }
+.pf-grant-host {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+}
+.pf-gate-note {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--pf-space-2);
+  margin: var(--pf-space-3) 0 0;
+  padding: 10px 12px;
+  font-size: var(--pf-fs-caption);
+  color: var(--pf-text-secondary);
+  background: var(--pf-gold-tint);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius-btn);
+}
+
+/* ---- Footer ------------------------------------------------------------------------ */
+.pf-options .pf-footer {
+  background: var(--pf-card);
+  margin-top: var(--pf-space-6);
+}

@@ -1,0 +1,44 @@
+<!-- zovo-sidebar.html — Zovo conversion sidebar for PaperFetch.
+     Copied from engine/5-design-ux-ui-monetization/monetization/zovo-sidebar.html
+     and filled per MONETIZE-STANDARD §5:
+       SLUG = paperfetch
+       ITEM_ID = TODO (CWS item id is assigned at publish; phase 6 fills it)
+       3 real Pro benefits below; NO sibling extension list (CWS §B).
+     Sells ONLY this extension's own Pro. No ratings, counts, scarcity, or
+     review solicitation (CWS §A). The risk-reversal line states the real
+     14-day refund (COPY-DOCTRINE §7: no trial exists, so none is named).
+     Fetch-mounted by options.ts into #pf-monetization; behavior lives in
+     zovo-sidebar.js. -->
+<aside class="zovo-sidebar" aria-label="Zovo">
+  <!-- GET PRO (this extension only; the fleet bundle offer lives on zovo.one) -->
+  <section class="zs-card zs-card--pro" data-zs="pro">
+    <div class="zs-eyebrow">Pro</div>
+    <h3 class="zs-h">Unlock Pro. Pay once, yours forever.</h3>
+    <ul class="zs-stack">
+      <li>Unlimited lookups, no daily cap</li>
+      <li>A library with no size cap</li>
+      <li>Auto-detect badge and one-click citation copy</li>
+    </ul>
+    <a class="zovo-btn zovo-btn--pro zovo-btn--block" data-zs-cta="pricing"
+       href="https://zovo.one/pricing?utm_source=paperfetch&utm_medium=extension&utm_campaign=upgrade&utm_content=sidebar"
+       target="_blank" rel="noopener">
+      Get Pro · $99 lifetime
+    </a>
+    <p class="zs-sub">One payment, not a subscription · 14-day refund, no questions</p>
+    <p class="zs-sub">Prefer monthly? $4.99/month on the same page.</p>
+  </section>
+
+  <!-- MORE TOOLS — own funnel only; NO sibling extensions named/linked (§B) -->
+  <section class="zs-card" data-zs="more">
+    <div class="zs-eyebrow">More tools</div>
+    <a class="zs-x" href="https://zovo.one?utm_source=paperfetch&utm_medium=extension"
+       target="_blank" rel="noopener">
+      <span class="zs-x__nm">Browse all tools at zovo.one</span><span class="zs-x__go" aria-hidden="true">→</span></a>
+  </section>
+
+  <footer class="zs-foot">
+    <a href="https://zovo.one/support" target="_blank" rel="noopener">Help</a>
+    <a href="https://zovo.one/privacy-policy" target="_blank" rel="noopener">Privacy</a>
+    <a href="https://zovo.one" target="_blank" rel="noopener">zovo.one</a>
+  </footer>
+</aside>

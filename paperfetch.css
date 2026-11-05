@@ -1,0 +1,203 @@
+/*
+ * styles/paperfetch.css — shared surface styles (TECHNICAL-BRIEF §6; both
+ * HTML pages link this — SURFACE contract). Owned by: SURFACE.
+ * Page chrome (header, cards, footer-adjacent patterns) plus the shared
+ * premium components: lock chips, badges, icon buttons, empty states,
+ * upsell card, and confirm panel. Page-specific layout lives in
+ * popup.css / options.css.
+ */
+
+/* ---- Header ---------------------------------------------------------------- */
+.pf-header {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-space-2);
+  padding: 10px 14px;
+  background: var(--pf-card);
+  border-bottom: 1px solid var(--pf-border);
+}
+.pf-logo { border-radius: 5px; flex: none; }
+.pf-title {
+  font-size: 15px;
+  font-weight: var(--pf-fw-heading);
+  letter-spacing: -0.01em;
+}
+.pf-header .pf-tier { margin-left: auto; }
+
+/* ---- Main column ------------------------------------------------------------ */
+.pf-main { padding: var(--pf-space-3); }
+
+/* ---- Card ------------------------------------------------------------------ */
+.pf-card {
+  background: var(--pf-card);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius-card);
+  box-shadow: var(--pf-shadow-sm);
+  padding: var(--pf-space-5);
+  margin-bottom: var(--pf-space-4);
+}
+.pf-card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-space-2);
+  margin-bottom: var(--pf-space-2);
+}
+.pf-card-title {
+  margin: 0;
+  font-size: var(--pf-fs-subheading);
+  font-weight: var(--pf-fw-heading);
+  letter-spacing: -0.01em;
+}
+.pf-card-head .pf-card-title { margin-right: auto; }
+
+/* ---- Eyebrow + hint --------------------------------------------------------- */
+.pf-eyebrow {
+  margin: 0 0 var(--pf-space-2);
+  font-size: 11px;
+  font-weight: var(--pf-fw-heading);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--pf-text-secondary);
+}
+.pf-hint {
+  margin: var(--pf-space-2) 0 0;
+  font-size: var(--pf-fs-caption);
+  line-height: 1.45;
+  color: var(--pf-text-secondary);
+}
+
+/* ---- Lock chip + inline lock glyph ------------------------------------------ */
+.pf-lock-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pf-gold-text);
+  background: var(--pf-gold-tint);
+  border-radius: var(--pf-radius-pill);
+  padding: 2px 8px;
+}
+.pf-lock-chip svg { width: 10px; height: 10px; }
+.pf-lock { display: inline-flex; align-items: center; }
+.pf-lock svg { width: 100%; height: 100%; display: block; }
+
+/* ---- Status badges (found / not-found) -------------------------------------- */
+.pf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: var(--pf-fw-medium);
+  border-radius: var(--pf-radius-pill);
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.pf-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.pf-badge--found { color: var(--pf-success-text); background: var(--pf-success-tint); }
+.pf-badge--missing { color: var(--pf-text-secondary); background: var(--pf-surface); }
+
+/* ---- Icon button ------------------------------------------------------------ */
+.pf-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--pf-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--pf-transition), color var(--pf-transition);
+}
+.pf-iconbtn:hover { background: var(--pf-surface-2); color: var(--pf-text); }
+.pf-iconbtn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--pf-card), 0 0 0 4px var(--pf-focus);
+}
+.pf-iconbtn svg { width: 15px; height: 15px; }
+.pf-iconbtn .pf-lock { display: none; width: 9px; height: 9px; position: absolute; right: 1px; bottom: 1px; color: var(--pf-gold-text); }
+.pf-iconbtn--locked .pf-lock { display: inline-flex; }
+.pf-iconbtn--danger:hover { background: var(--pf-error-tint); color: var(--pf-error-text); }
+
+/* ---- Empty state ------------------------------------------------------------ */
+.pf-empty {
+  text-align: center;
+  padding: var(--pf-space-7) var(--pf-space-5);
+}
+.pf-empty-art {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto var(--pf-space-3);
+  color: var(--pf-primary-light);
+}
+.pf-empty-art .pf-empty-art-accent { color: var(--pf-primary-strong); }
+.pf-empty-title {
+  margin: 0 0 var(--pf-space-1);
+  font-size: var(--pf-fs-subheading);
+  font-weight: var(--pf-fw-heading);
+  letter-spacing: -0.01em;
+}
+.pf-empty-text {
+  margin: 0 auto;
+  max-width: 42ch;
+  font-size: 13px;
+  color: var(--pf-text-secondary);
+}
+
+/* ---- Upsell card (cap-hit / post-success / library-full) -------------------- */
+.pf-upsell {
+  border: 1px solid var(--pf-border);
+  border-top: 2px solid var(--pf-pro-gold);
+  border-radius: var(--pf-radius-card);
+  background: var(--pf-card);
+  box-shadow: var(--pf-shadow-sm);
+  padding: var(--pf-space-4);
+  margin-bottom: var(--pf-space-3);
+}
+.pf-upsell-copy {
+  margin: 0 0 var(--pf-space-1);
+  font-size: 13px;
+  font-weight: var(--pf-fw-medium);
+  line-height: 1.45;
+}
+.pf-upsell-price {
+  margin: 0 0 var(--pf-space-3);
+  font-size: var(--pf-fs-caption);
+  color: var(--pf-text-secondary);
+}
+.pf-upsell-actions { display: flex; gap: var(--pf-space-2); }
+.pf-upsell-actions .pf-btn-pro { flex: 1; }
+
+/* ---- Confirm panel (clear-all, type-to-confirm) ----------------------------- */
+.pf-confirm {
+  border: 1px solid var(--pf-error-tint);
+  border-left: 3px solid var(--pf-error);
+  border-radius: var(--pf-radius-btn);
+  background: var(--pf-error-tint);
+  padding: var(--pf-space-3);
+  margin-bottom: var(--pf-space-3);
+}
+.pf-confirm-text {
+  margin: 0 0 var(--pf-space-2);
+  font-size: 13px;
+  font-weight: var(--pf-fw-medium);
+  color: var(--pf-error-text);
+}
+.pf-confirm-row { display: flex; gap: var(--pf-space-2); }
+.pf-confirm-row .pf-input { flex: 1; max-width: 180px; background: var(--pf-card); }
+
+@media (prefers-color-scheme: dark) {
+  .pf-confirm { border-color: var(--pf-border); border-left-color: var(--pf-error); }
+}

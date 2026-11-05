@@ -1,0 +1,309 @@
+/*
+ * styles/pape4a9d-base.css — engine base tokens, hue 253 (Architect rotation
+ * from 262; brief §10). Palette follows the canonical divergence formula
+ * (divergence-identity.mjs): anchor hsl(253 62% 62%), complementary identity
+ * token hsl(58 60% 55%). CSS prefix pf- (namespace pape4a9d).
+ * Owned by: SURFACE builds on these tokens; do not re-declare brand colors
+ * per page.
+ *
+ * HUE-253 AA DOCTRINE (measured, WCAG 2.x relative luminance):
+ *   anchor  hsl(253 62% 62) — brand mark / graphical accents (4.55:1 on white;
+ *           graphical or large-text use only).
+ *   strong  hsl(253 60% 44) — text-safe primary FILL. White-on 9.05:1.
+ *   dark    hsl(253 60% 36) — hover fill. White-on 11.18:1.
+ *   ptext   hsl(253 58% 40) — accent as small TEXT: 9.96:1 on white,
+ *           8.74:1 on the primary-50 tint.
+ *   dark mode: primary fill lifts to hsl(253 65% 55) (white-on 6.42:1),
+ *           accent text lifts to hsl(253 80% 78) (6.76:1 on the dark card).
+ *   status: success-text 145/63/28 = 5.78:1; error fill 0/70/45 = white-on
+ *           5.87:1; error-text 0/68/42 = 6.57:1; gold fill carries dark text
+ *           (8.22:1), gold text uses hsl(32 90% 32) = 5.61:1 — raw gold is
+ *           never small text.
+ */
+
+/* ---- Design tokens (light) ------------------------------------------------ */
+:root {
+  /* Brand */
+  --pf-primary:        hsl(253 62% 62%);
+  --pf-primary-strong: hsl(253 60% 44%);
+  --pf-primary-dark:   hsl(253 60% 36%);
+  --pf-primary-light:  hsl(253 62% 72%);
+  --pf-primary-50:     hsl(253 62% 96%);
+  --pf-primary-text:   hsl(253 58% 40%);
+  --pf-on-primary:     hsl(0 0% 100%);
+  --pf-accent:         hsl(58 60% 55%);
+
+  /* Surfaces & text */
+  --pf-bg:             hsl(253 22% 98%);
+  --pf-card:           hsl(0 0% 100%);
+  --pf-surface:        hsl(253 18% 95%);
+  --pf-surface-2:      hsl(253 16% 91%);
+  --pf-border:         hsl(253 14% 88%);
+  --pf-border-strong:  hsl(253 14% 78%);
+  --pf-text:           hsl(253 25% 12%);
+  --pf-text-secondary: hsl(253 8% 42%);
+
+  /* Status */
+  --pf-success:        hsl(145 63% 32%);
+  --pf-success-text:   hsl(145 63% 28%);
+  --pf-success-tint:   hsl(145 60% 94%);
+  --pf-warning-text:   hsl(30 90% 32%);
+  --pf-warning-tint:   hsl(38 90% 94%);
+  --pf-error:          hsl(0 70% 45%);
+  --pf-error-dark:     hsl(0 70% 38%);
+  --pf-error-text:     hsl(0 68% 42%);
+  --pf-error-tint:     hsl(0 70% 96%);
+
+  /* Pro gold (fill carries dark text; gold-text for small glyphs/labels) */
+  --pf-pro-gold:       hsl(38 92% 50%);
+  --pf-on-gold:        hsl(253 25% 12%);
+  --pf-gold-text:      hsl(32 90% 32%);
+  --pf-gold-tint:      hsl(38 90% 95%);
+
+  /* Focus */
+  --pf-focus:          hsl(253 60% 44%);
+
+  /* Typography */
+  --pf-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --pf-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+  --pf-fs-caption:    12px;
+  --pf-fs-body:       14px;
+  --pf-fs-subheading: 16px;
+  --pf-fs-heading:    20px;
+  --pf-fs-title:      24px;
+  --pf-fw-body:       400;
+  --pf-fw-medium:     500;
+  --pf-fw-heading:    600;
+
+  /* Radii */
+  --pf-radius-card:  12px;
+  --pf-radius-btn:   8px;
+  --pf-radius-input: 8px;
+  --pf-radius-pill:  999px;
+
+  /* Shadows (hue-tinted) */
+  --pf-shadow-sm: 0 1px 2px hsl(253 40% 20% / 0.06);
+  --pf-shadow:    0 1px 3px hsl(253 40% 20% / 0.07), 0 8px 20px -8px hsl(253 40% 20% / 0.12);
+  --pf-shadow-lg: 0 20px 44px -12px hsl(253 45% 25% / 0.28);
+
+  /* Motion */
+  --pf-transition: 150ms ease-in-out;
+
+  /* Spacing scale */
+  --pf-space-1: 4px;  --pf-space-2: 8px;  --pf-space-3: 12px;
+  --pf-space-4: 16px; --pf-space-5: 20px; --pf-space-6: 24px;
+  --pf-space-7: 32px; --pf-space-8: 40px;
+}
+
+/* ---- Design tokens (dark) -------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pf-primary:        hsl(253 70% 68%);
+    --pf-primary-strong: hsl(253 65% 55%);
+    --pf-primary-dark:   hsl(253 68% 62%);
+    --pf-primary-light:  hsl(253 55% 60%);
+    --pf-primary-50:     hsl(253 30% 18%);
+    --pf-primary-text:   hsl(253 80% 78%);
+
+    --pf-bg:             hsl(253 18% 9%);
+    --pf-card:           hsl(253 14% 13%);
+    --pf-surface:        hsl(253 12% 18%);
+    --pf-surface-2:      hsl(253 12% 23%);
+    --pf-border:         hsl(253 12% 25%);
+    --pf-border-strong:  hsl(253 12% 34%);
+    --pf-text:           hsl(253 18% 94%);
+    --pf-text-secondary: hsl(253 10% 68%);
+
+    --pf-success:        hsl(145 50% 45%);
+    --pf-success-text:   hsl(145 50% 62%);
+    --pf-success-tint:   hsl(145 30% 16%);
+    --pf-warning-text:   hsl(38 85% 62%);
+    --pf-warning-tint:   hsl(38 35% 16%);
+    --pf-error:          hsl(0 70% 45%);
+    --pf-error-dark:     hsl(0 72% 52%);
+    --pf-error-text:     hsl(0 75% 68%);
+    --pf-error-tint:     hsl(0 40% 18%);
+
+    --pf-pro-gold:       hsl(38 80% 56%);
+    --pf-on-gold:        hsl(253 25% 12%);
+    --pf-gold-text:      hsl(38 85% 65%);
+    --pf-gold-tint:      hsl(38 40% 18%);
+
+    --pf-focus:          hsl(253 80% 72%);
+
+    --pf-shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.4);
+    --pf-shadow:    0 1px 3px hsl(0 0% 0% / 0.45), 0 8px 20px -8px hsl(0 0% 0% / 0.5);
+    --pf-shadow-lg: 0 20px 44px -12px hsl(0 0% 0% / 0.6);
+  }
+}
+
+/* ---- Base ------------------------------------------------------------------ */
+body {
+  margin: 0;
+  font-family: var(--pf-font);
+  font-size: var(--pf-fs-body);
+  line-height: 1.5;
+  color: var(--pf-text);
+  background: var(--pf-bg);
+  -webkit-font-smoothing: antialiased;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* [hidden] must always win over component display rules (fleet lesson:
+ * base display rules silently beat the UA [hidden] rule without this). */
+[hidden] { display: none !important; }
+
+h1, h2, h3, p { margin-top: 0; }
+
+/* ---- Buttons --------------------------------------------------------------- */
+.pf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pf-space-2);
+  min-height: 36px;
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: var(--pf-fw-medium);
+  line-height: 1.2;
+  color: var(--pf-on-primary);
+  background: var(--pf-primary-strong);
+  border: 1px solid transparent;
+  border-radius: var(--pf-radius-btn);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--pf-transition), border-color var(--pf-transition),
+              color var(--pf-transition), transform var(--pf-transition),
+              box-shadow var(--pf-transition);
+}
+.pf-btn:hover { background: var(--pf-primary-dark); }
+.pf-btn:active { transform: translateY(1px); }
+.pf-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--pf-card), 0 0 0 4px var(--pf-focus);
+}
+.pf-btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+.pf-btn[disabled]:hover { background: var(--pf-primary-strong); }
+
+.pf-btn-secondary {
+  color: var(--pf-text);
+  background: var(--pf-surface);
+  border-color: var(--pf-border);
+}
+.pf-btn-secondary:hover { background: var(--pf-surface-2); border-color: var(--pf-border-strong); }
+.pf-btn-secondary[disabled]:hover { background: var(--pf-surface); }
+
+.pf-btn-ghost {
+  color: var(--pf-primary-text);
+  background: transparent;
+}
+.pf-btn-ghost:hover { background: var(--pf-primary-50); }
+.pf-btn-ghost[disabled]:hover { background: transparent; }
+
+.pf-btn-pro {
+  background: var(--pf-pro-gold);
+  color: var(--pf-on-gold);
+  font-weight: var(--pf-fw-heading);
+}
+.pf-btn-pro:hover { background: var(--pf-pro-gold); filter: brightness(0.95); }
+
+.pf-btn-danger { background: var(--pf-error); color: #fff; }
+.pf-btn-danger:hover { background: var(--pf-error-dark); }
+.pf-btn-danger[disabled]:hover { background: var(--pf-error); }
+
+/* Quiet destructive action (text-level, e.g. Clear library next to exports). */
+.pf-btn--danger-text {
+  color: var(--pf-error-text);
+  background: transparent;
+}
+.pf-btn--danger-text:hover { background: var(--pf-error-tint); }
+
+.pf-btn-block { width: 100%; }
+
+/* Locked Pro teaser state (show, do not hide): the inline .pf-lock glyph
+ * appears and tints gold; the button stays clickable for the upsell reveal. */
+.pf-btn .pf-lock { display: none; width: 13px; height: 13px; flex: none; }
+.pf-btn--locked .pf-lock { display: inline-flex; color: var(--pf-gold-text); }
+
+/* ---- Tier badge ------------------------------------------------------------ */
+.pf-tier {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pf-on-gold);
+  background: var(--pf-pro-gold);
+  border-radius: var(--pf-radius-pill);
+  padding: 2px 8px;
+}
+
+/* ---- Inputs ---------------------------------------------------------------- */
+.pf-input {
+  width: 100%;
+  min-height: 36px;
+  font: inherit;
+  color: var(--pf-text);
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius-input);
+  padding: 7px 12px;
+  transition: border-color var(--pf-transition), box-shadow var(--pf-transition),
+              background var(--pf-transition);
+}
+.pf-input::placeholder { color: var(--pf-text-secondary); }
+.pf-input:hover { border-color: var(--pf-border-strong); }
+.pf-input:focus-visible {
+  outline: none;
+  border-color: var(--pf-focus);
+  background: var(--pf-card);
+  box-shadow: 0 0 0 3px var(--pf-primary-50);
+}
+
+/* ---- Links ----------------------------------------------------------------- */
+.pf-link {
+  color: var(--pf-primary-text);
+  text-decoration: none;
+  font-weight: var(--pf-fw-medium);
+}
+.pf-link:hover { text-decoration: underline; }
+.pf-link:focus-visible {
+  outline: 2px solid var(--pf-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---- Footer ---------------------------------------------------------------- */
+.pf-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--pf-space-4);
+  padding: 10px 12px;
+  border-top: 1px solid var(--pf-border);
+}
+.pf-footer-link {
+  color: var(--pf-text-secondary);
+  text-decoration: none;
+  font-size: var(--pf-fs-caption);
+}
+.pf-footer-link:hover { color: var(--pf-primary-text); }
+.pf-footer-link:focus-visible {
+  outline: 2px solid var(--pf-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---- Utilities ------------------------------------------------------------- */
+.pf-mono { font-family: var(--pf-font-mono); font-size: 0.92em; }
+.pf-muted { color: var(--pf-text-secondary); }
+.pf-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

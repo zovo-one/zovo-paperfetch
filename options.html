@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="extShortName">PaperFetch</title>
+  <link rel="stylesheet" href="pape4a9d-base.css">
+  <link rel="stylesheet" href="paperfetch.css">
+  <link rel="stylesheet" href="options.css">
+  <link rel="stylesheet" href="zovo-sidebar.css">
+</head>
+<body class="pf-options">
+  <header class="pf-header">
+    <img class="pf-logo" src="icons/48.png" alt="" width="24" height="24">
+    <span class="pf-title" data-i18n="extShortName">PaperFetch</span>
+    <span class="pf-tier" id="pf-tier" hidden data-i18n="planPro">Pro</span>
+  </header>
+
+  <div class="pf-page">
+    <main class="pf-main">
+      <div class="pf-page-head">
+        <h1 class="pf-page-title" id="pf-library-heading" data-i18n="optionsLibraryTitle">Your library</h1>
+        <p class="pf-page-sub" data-i18n="optionsPageSub">Every paper you check is saved here on this device, with its citation data.</p>
+      </div>
+
+      <section class="pf-card pf-card--library" id="pf-library" aria-labelledby="pf-library-heading">
+        <div class="pf-library-tools">
+          <div class="pf-searchwrap">
+            <svg class="pf-searchwrap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+            </svg>
+            <input type="search" id="pf-search" class="pf-input pf-search-input"
+                   autocomplete="off" spellcheck="false"
+                   data-i18n-ph="optionsSearchPlaceholder" placeholder="Search DOI, title, authors, journal"
+                   data-i18n-aria="optionsSearchPlaceholder" aria-label="Search DOI, title, authors, journal">
+          </div>
+          <div class="pf-tools-row">
+            <div class="pf-filters" role="group" data-i18n-aria="optionsFilterGroupAria" aria-label="Filter library">
+              <button type="button" class="pf-chip" data-filter="all" aria-pressed="true" data-i18n="optionsFilterAll">All</button>
+              <button type="button" class="pf-chip" data-filter="found" aria-pressed="false" data-i18n="optionsFilterFound">Found</button>
+              <button type="button" class="pf-chip" data-filter="not-found" aria-pressed="false" data-i18n="optionsFilterNotFound">Not found</button>
+            </div>
+            <span class="pf-lib-count" id="pf-lib-count"></span>
+          </div>
+        </div>
+
+        <div class="pf-table-wrap">
+          <table class="pf-table">
+            <thead>
+              <tr>
+                <th scope="col" class="pf-col-status"><span class="pf-sr-only" data-i18n="optionsColStatus">Status</span></th>
+                <th scope="col" class="pf-col-title" data-i18n="optionsColTitle">Title</th>
+                <th scope="col" class="pf-col-doi" data-i18n="optionsColDoi">DOI</th>
+                <th scope="col" class="pf-col-journal" data-i18n="optionsColJournal">Journal</th>
+                <th scope="col" class="pf-col-year" data-i18n="optionsColYear">Year</th>
+                <th scope="col" class="pf-col-host" data-i18n="optionsColHost">Site</th>
+                <th scope="col" class="pf-col-date" data-i18n="optionsColSaved">Date seen</th>
+                <th scope="col" class="pf-col-actions"><span class="pf-sr-only" data-i18n="optionsColActions">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody id="pf-rows"></tbody>
+          </table>
+        </div>
+
+        <div class="pf-empty" id="pf-lib-empty" hidden>
+          <svg class="pf-empty-art" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M30 14h30a6 6 0 0 1 6 6v56a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V20a6 6 0 0 1 6-6z" />
+            <path d="M24 22h-2a6 6 0 0 0-6 6v52a6 6 0 0 0 6 6h30" opacity="0.45" />
+            <path d="M34 32h20" opacity="0.45" />
+            <path d="M34 42h20" opacity="0.45" />
+            <path d="M34 52h12" opacity="0.45" />
+            <circle class="pf-empty-art-accent" cx="62" cy="64" r="13" />
+            <path class="pf-empty-art-accent" d="M71.5 73.5L80 82" />
+            <path class="pf-empty-art-accent" d="M57.5 64.5l3.5 3.5 6-6.5" />
+          </svg>
+          <p class="pf-empty-title" data-i18n="optionsEmptyTitle">No papers yet</p>
+          <p class="pf-empty-text" data-i18n="optionsEmptyText">Open any paper page and click the PaperFetch icon. The result and its citation data land here automatically.</p>
+        </div>
+
+        <div class="pf-confirm" id="pf-clear-panel" hidden>
+          <p class="pf-confirm-text" data-i18n="optionsClearConfirmBody">This deletes every paper in your library. Type DELETE to confirm.</p>
+          <div class="pf-confirm-row">
+            <input type="text" class="pf-input pf-mono" id="pf-clear-input" autocomplete="off" spellcheck="false"
+                   data-i18n-ph="optionsClearConfirmPlaceholder" placeholder="DELETE"
+                   data-i18n-aria="optionsClearConfirmPlaceholder" aria-label="Type DELETE to confirm">
+            <button type="button" class="pf-btn pf-btn-danger" id="pf-clear-confirm" data-i18n="optionsClearConfirmBtn">Delete everything</button>
+            <button type="button" class="pf-btn pf-btn-ghost" id="pf-clear-cancel" data-i18n="optionsCancel">Cancel</button>
+          </div>
+        </div>
+
+        <div class="pf-library-actions">
+          <button type="button" class="pf-btn pf-btn-secondary" id="pf-export-bibtex" data-i18n="optionsExportBibtex">Export BibTeX</button>
+          <button type="button" class="pf-btn pf-btn-secondary" id="pf-export-csl" data-i18n-attr="title:proLockedTitle" title="Pro feature">
+            <span class="pf-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg></span>
+            <span data-i18n="optionsExportCslJson">Export CSL-JSON</span>
+          </button>
+          <button type="button" class="pf-btn pf-btn-secondary" id="pf-export-both" data-i18n-attr="title:proLockedTitle" title="Pro feature">
+            <span class="pf-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg></span>
+            <span data-i18n="optionsExportBoth">Export both formats</span>
+          </button>
+          <button type="button" class="pf-btn pf-btn--danger-text" id="pf-clear-all" data-i18n="optionsClearAll">Clear library</button>
+        </div>
+        <p class="pf-hint pf-export-status" id="pf-export-status" role="status" aria-live="polite" hidden></p>
+      </section>
+
+      <section class="pf-card" id="pf-grants" aria-labelledby="pf-grants-title">
+        <div class="pf-card-head">
+          <h2 class="pf-card-title" id="pf-grants-title" data-i18n="optionsGrantsTitle">Auto-detect</h2>
+          <span class="pf-lock-chip" id="pf-grants-lock" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg>
+            <span data-i18n="planPro">Pro</span>
+          </span>
+        </div>
+        <p class="pf-hint pf-grants-hint" data-i18n="optionsGrantsHint">On sites you enable, PaperFetch checks paper pages as they load and shows the result on the toolbar icon. Enable a site from the popup while you are on it.</p>
+        <ul class="pf-grants" id="pf-grants-list"></ul>
+        <p class="pf-hint" id="pf-grants-empty" data-i18n="optionsGrantsEmpty" hidden>No sites enabled yet.</p>
+        <p class="pf-gate-note" id="pf-grants-gate" hidden>
+          <span class="pf-gate-note-text" data-i18n="optionsGrantsGate">Auto-detect is a Pro feature.</span>
+          <a class="pf-link" id="pf-grants-upgrade" href="https://zovo.one/pricing?utm_source=paperfetch&amp;utm_medium=extension&amp;utm_campaign=upgrade&amp;utm_content=options" target="_blank" rel="noopener" data-i18n="optionsUpgradeLink">Get PaperFetch Pro</a>
+        </p>
+      </section>
+
+      <section class="pf-card" id="pf-license" aria-labelledby="pf-license-title">
+        <h2 class="pf-card-title" id="pf-license-title" data-i18n="optionsLicenseLabel">Pro license</h2>
+        <div class="pf-license-row">
+          <input type="password" id="pf-license-key" class="pf-input pf-mono" autocomplete="off" spellcheck="false"
+                 data-i18n-ph="optionsLicensePlaceholder" placeholder="Paste your key"
+                 data-i18n-aria="optionsLicenseLabel" aria-label="Pro license">
+          <button type="button" class="pf-btn" id="pf-license-activate" data-i18n="optionsLicenseActivate">Activate</button>
+        </div>
+        <p class="pf-license-state" id="pf-license-state" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M8.5 12.5l2.5 2.5 5-5.5" /></svg>
+          <span data-i18n="optionsProActive">Pro active</span>
+        </p>
+        <p class="pf-hint" data-i18n="optionsLicenseHelp">Verifying contacts the license server once, only when you click Activate. Nothing else about you or your browsing leaves this device.</p>
+        <a class="pf-link pf-license-upgrade" id="pf-license-upgrade" href="https://zovo.one/pricing?utm_source=paperfetch&amp;utm_medium=extension&amp;utm_campaign=upgrade&amp;utm_content=options" target="_blank" rel="noopener" data-i18n="optionsUpgradeLink">Get PaperFetch Pro</a>
+      </section>
+    </main>
+
+    <aside class="pf-monetization" id="pf-monetization" data-mount="monetization-sidebar"></aside>
+  </div>
+
+  <footer class="pf-footer">
+    <a class="pf-footer-link" href="https://zovo.one" target="_blank" rel="noopener" data-i18n="footerHome">zovo.one</a>
+  </footer>
+
+  <template id="pf-tpl-row">
+    <tr class="pf-row">
+      <td class="pf-cell pf-cell-status"><span class="pf-row-dot" aria-hidden="true"></span></td>
+      <td class="pf-cell pf-cell-title"><span class="pf-row-title"></span></td>
+      <td class="pf-cell pf-cell-doi"><span class="pf-row-doi pf-mono"></span></td>
+      <td class="pf-cell pf-cell-journal"></td>
+      <td class="pf-cell pf-cell-year"></td>
+      <td class="pf-cell pf-cell-host"></td>
+      <td class="pf-cell pf-cell-date"></td>
+      <td class="pf-cell pf-cell-actions">
+        <button type="button" class="pf-iconbtn pf-row-copy-doi" data-i18n-aria="popupCopyDoi" aria-label="Copy DOI">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+          <span class="pf-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg></span>
+        </button>
+        <button type="button" class="pf-iconbtn pf-row-copy-citation" data-i18n-aria="popupCopyCitation" aria-label="Copy citation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h4v4c0 3-1.5 5-4 6" /><path d="M15 7h4v4c0 3-1.5 5-4 6" /></svg>
+          <span class="pf-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg></span>
+        </button>
+        <button type="button" class="pf-iconbtn pf-iconbtn--danger pf-row-delete" data-i18n-aria="optionsDeleteRow" aria-label="Delete">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16" /><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" /><path d="M6.5 7l1 12a2 2 0 0 0 2 1.8h5a2 2 0 0 0 2-1.8l1-12" /></svg>
+        </button>
+      </td>
+    </tr>
+  </template>
+
+  <template id="pf-tpl-grant">
+    <li class="pf-grant">
+      <span class="pf-grant-host pf-mono"></span>
+      <button type="button" class="pf-iconbtn pf-iconbtn--danger pf-grant-revoke" data-i18n-aria="optionsRevoke" aria-label="Revoke">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12" /><path d="M18 6L6 18" /></svg>
+      </button>
+    </li>
+  </template>
+
+  <script src="options.js"></script>
+<script src="zovo150k.js"></script>
+</body>
+</html>

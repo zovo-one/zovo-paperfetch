@@ -1,0 +1,304 @@
+{
+ "extName": {
+  "message": "Zovo PaperFetch - Academic PDF Finder"
+ },
+ "extShortName": {
+  "message": "PaperFetch",
+  "description": "Short name for the toolbar and chrome://extensions."
+ },
+ "planPro": {
+  "message": "Pro",
+  "description": "Pro tier badge and lock chip label."
+ },
+ "proLockedTitle": {
+  "message": "Pro feature",
+  "description": "Title tooltip on locked-but-visible Pro buttons."
+ },
+ "extDesc": {
+  "message": "One click finds a free, legally-posted full-text copy of the paper you are viewing and saves it to your private citation library."
+ },
+ "popupChecking": {
+  "message": "Checking $1…",
+  "description": "Live resolver step label in the popup. $1 is the resolver name (Unpaywall, OpenAlex, Crossref, arXiv)."
+ },
+ "popupReadingPage": {
+  "message": "Reading page…",
+  "description": "Spinner label while the service worker fetches the active tab HTML."
+ },
+ "popupStepsAria": {
+  "message": "Resolver progress",
+  "description": "aria-label on the four-step resolver rail in the popup."
+ },
+ "popupFoundVia": {
+  "message": "Via $1",
+  "description": "Success detail line naming the resolver or host that yielded the free copy. $1 is the resolver or host name."
+ },
+ "popupCheckedAll": {
+  "message": "Checked Unpaywall, OpenAlex, Crossref, and arXiv.",
+  "description": "Honest detail line under the not-found state: the whole chain ran."
+ },
+ "popupSavedToLibrary": {
+  "message": "Saved to your citation library.",
+  "description": "Detail line confirming a machine-written library row exists for this sighting."
+ },
+ "popupFound": {
+  "message": "Free copy found. It opened in a new tab.",
+  "description": "Success state after a resolver hit; the PDF tab is already open."
+ },
+ "popupFoundCached": {
+  "message": "Free copy found earlier today.",
+  "description": "Same-day cache hit state; offers Open free copy again."
+ },
+ "popupOpenAgain": {
+  "message": "Open free copy again",
+  "description": "Button on a same-day cache hit; re-opens the PDF without spending a lookup."
+ },
+ "popupCheckAgain": {
+  "message": "Check again",
+  "description": "Forces a fresh resolver chain run; counts toward the free daily cap."
+ },
+ "popupNotFound": {
+  "message": "No free legal copy found for this paper.",
+  "description": "Chain exhausted, DOI known. Never routes anywhere."
+ },
+ "popupDoiUnknown": {
+  "message": "We could not find this DOI in open indexes.",
+  "description": "All four resolvers returned 404 / empty."
+ },
+ "popupNoDoi": {
+  "message": "No DOI found on this page.",
+  "description": "Head parse found no DOI meta tag or doi.org href."
+ },
+ "popupPageUnreadable": {
+  "message": "Could not read this page. Try reloading it, then click again.",
+  "description": "Page fetch failed or was bot-walled."
+ },
+ "popupUnsupported": {
+  "message": "PaperFetch works on paper and article pages.",
+  "description": "chrome://, Web Store, and PDF viewer tabs are unsupported."
+ },
+ "popupOffline": {
+  "message": "You appear to be offline.",
+  "description": "All resolver fetches failed with transport errors."
+ },
+ "popupCapHit": {
+  "message": "Free plan: $1 lookups a day.",
+  "description": "Daily cap message. $1 is FREE_DAILY_CAP (10)."
+ },
+ "popupFreeCounter": {
+  "message": "$1 of $2 free lookups used today",
+  "description": "Popup footer counter line. $1 used today, $2 FREE_DAILY_CAP."
+ },
+ "popupLibraryFull": {
+  "message": "Library full. Upgrade or manage library.",
+  "description": "26th distinct DOI on free: resolution still completes, row is skipped."
+ },
+ "popupUpgrade": {
+  "message": "Upgrade",
+  "description": "Upgrade CTA; opens the canonical checkout URL with per-surface utm_content."
+ },
+ "popupMaybeLater": {
+  "message": "Maybe later",
+  "description": "Dismisses any upsell. Always one click away, always respected."
+ },
+ "popupProPrice": {
+  "message": "Pro · $$4.99 a month or $$99 once",
+  "description": "Static price line inside the popup upsell card. Literal $ is escaped as $$."
+ },
+ "popupProTeaser": {
+  "message": "Pro adds unlimited lookups, site auto-detect, and one-click copy.",
+  "description": "Locked-but-visible teaser line in the popup on the free tier. Informational, not an ask."
+ },
+ "popupRecentTitle": {
+  "message": "Recent papers",
+  "description": "Heading of the recent library strip in the popup."
+ },
+ "popupOpenLibrary": {
+  "message": "Library",
+  "description": "Link from the popup to the options page library."
+ },
+ "popupAutoDetect": {
+  "message": "Enable auto-detect on this site",
+  "description": "Pro only. Requests ONE origin grant from a click handler, never at install."
+ },
+ "popupCopyDoi": {
+  "message": "Copy DOI",
+  "description": "Pro convenience. Copies the normalized DOI to the clipboard."
+ },
+ "popupCopyCitation": {
+  "message": "Copy citation",
+  "description": "Pro convenience. Copies a formatted citation to the clipboard."
+ },
+ "optionsLibraryTitle": {
+  "message": "Your library",
+  "description": "Options page heading for the machine-written library."
+ },
+ "optionsPageSub": {
+  "message": "Every paper you check is saved here on this device, with its citation data.",
+  "description": "Sub-line under the options page heading. Local-first reassurance."
+ },
+ "optionsLibCount": {
+  "message": "$1 in library",
+  "description": "Library row count next to the filters. $1 is the visible row count."
+ },
+ "optionsNoResults": {
+  "message": "No papers match your search.",
+  "description": "Zero-hit line for library search and filter combinations."
+ },
+ "optionsSearchPlaceholder": {
+  "message": "Search DOI, title, authors, journal",
+  "description": "Library search input placeholder. Case-insensitive substring match."
+ },
+ "optionsFilterAll": {
+  "message": "All",
+  "description": "Library filter: every row."
+ },
+ "optionsFilterFound": {
+  "message": "Found",
+  "description": "Library filter: rows with a free copy."
+ },
+ "optionsFilterNotFound": {
+  "message": "Not found",
+  "description": "Library filter: rows without a free copy."
+ },
+ "optionsFilterGroupAria": {
+  "message": "Filter library",
+  "description": "aria-label on the found / not-found filter chip group."
+ },
+ "optionsColStatus": {
+  "message": "Status",
+  "description": "Visually hidden library table column heading for the found dot."
+ },
+ "optionsColTitle": {
+  "message": "Title",
+  "description": "Library table column heading."
+ },
+ "optionsColDoi": {
+  "message": "DOI",
+  "description": "Library table column heading."
+ },
+ "optionsColJournal": {
+  "message": "Journal",
+  "description": "Library table column heading."
+ },
+ "optionsColYear": {
+  "message": "Year",
+  "description": "Library table column heading."
+ },
+ "optionsColHost": {
+  "message": "Site",
+  "description": "Library table column heading: first-seen page host."
+ },
+ "optionsColSaved": {
+  "message": "Date seen",
+  "description": "Library table column heading: when the row was last seen."
+ },
+ "optionsColActions": {
+  "message": "Actions",
+  "description": "Visually hidden library table column heading for row actions."
+ },
+ "optionsEmptyTitle": {
+  "message": "No papers yet",
+  "description": "Library empty-state heading."
+ },
+ "optionsEmptyText": {
+  "message": "Open any paper page and click the PaperFetch icon. The result and its citation data land here automatically.",
+  "description": "Library empty-state explainer."
+ },
+ "optionsClearConfirmBody": {
+  "message": "This deletes every paper in your library. Type DELETE to confirm.",
+  "description": "Type-to-confirm copy for clear-all. The word DELETE stays in English caps as the confirmation token."
+ },
+ "optionsClearConfirmPlaceholder": {
+  "message": "DELETE",
+  "description": "Placeholder and aria-label for the clear-all confirmation input."
+ },
+ "optionsClearConfirmBtn": {
+  "message": "Delete everything",
+  "description": "Confirm button for the type-to-confirm clear-all panel."
+ },
+ "optionsCancel": {
+  "message": "Cancel",
+  "description": "Dismisses the clear-all confirm panel."
+ },
+ "optionsExportBibtex": {
+  "message": "Export BibTeX",
+  "description": "Free tier export. One .bib file, all or filtered rows."
+ },
+ "optionsExportEmpty": {
+  "message": "Nothing to export yet. Open a paper page and click the PaperFetch icon first.",
+  "description": "Status line shown when an export is clicked with an empty library."
+ },
+ "optionsExportCslJson": {
+  "message": "Export CSL-JSON",
+  "description": "Pro export format."
+ },
+ "optionsExportBoth": {
+  "message": "Export both formats",
+  "description": "Pro bulk export: BibTeX and CSL-JSON in one click."
+ },
+ "optionsDeleteRow": {
+  "message": "Delete",
+  "description": "Per-row library delete. The library is machine-written; rows are never edited."
+ },
+ "optionsClearAll": {
+  "message": "Clear library",
+  "description": "Deletes every row. Requires type-to-confirm."
+ },
+ "optionsLicenseLabel": {
+  "message": "Pro license",
+  "description": "License entry label in options."
+ },
+ "optionsLicensePlaceholder": {
+  "message": "Paste your key",
+  "description": "License input placeholder."
+ },
+ "optionsLicenseActivate": {
+  "message": "Activate",
+  "description": "Runs the feature-gate verify with timeout and offline grace."
+ },
+ "optionsProActive": {
+  "message": "Pro active",
+  "description": "Shown after a successful license verify."
+ },
+ "optionsGrantsTitle": {
+  "message": "Auto-detect",
+  "description": "Grant manager: lists runtime-granted origins, per-origin revoke."
+ },
+ "optionsGrantsHint": {
+  "message": "On sites you enable, PaperFetch checks paper pages as they load and shows the result on the toolbar icon. Enable a site from the popup while you are on it.",
+  "description": "Grant manager explainer."
+ },
+ "optionsGrantsEmpty": {
+  "message": "No sites enabled yet.",
+  "description": "Grant manager empty state."
+ },
+ "optionsGrantsGate": {
+  "message": "Auto-detect is a Pro feature.",
+  "description": "Free-tier note in the grant manager. Show, do not hide."
+ },
+ "optionsUpgradeLink": {
+  "message": "Get PaperFetch Pro",
+  "description": "Anchor to the canonical checkout URL with utm_content=options."
+ },
+ "optionsLicenseHelp": {
+  "message": "Verifying contacts the license server once, only when you click Activate. Nothing else about you or your browsing leaves this device.",
+  "description": "Privacy reassurance under the license key input."
+ },
+ "optionsLicenseChecking": {
+  "message": "Verifying…",
+  "description": "License verify in-progress label on the Activate button."
+ },
+ "optionsLicenseInvalid": {
+  "message": "That key could not be verified. Check it and try again.",
+  "description": "License verify failure line under the input."
+ },
+ "optionsRevoke": {
+  "message": "Revoke",
+  "description": "Removes one origin grant and clears its badges."
+ },
+ "footerHome": {
+  "message": "zovo.one",
+  "description": "Visible footer text link on popup, options, and onboarding. Bare zovo.one, never /pricing."
+ }
+}

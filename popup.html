@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="extShortName">PaperFetch</title>
+  <link rel="stylesheet" href="pape4a9d-base.css">
+  <link rel="stylesheet" href="paperfetch.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="pf-popup" data-state="working">
+  <header class="pf-header">
+    <img class="pf-logo" src="icons/32.png" alt="" width="20" height="20">
+    <span class="pf-title" data-i18n="extShortName">PaperFetch</span>
+    <span class="pf-tier" id="pf-tier" hidden data-i18n="planPro">Pro</span>
+  </header>
+
+  <main class="pf-main">
+    <section class="pf-hero" id="pf-hero" aria-live="polite">
+      <div class="pf-glyph" id="pf-state-icon" aria-hidden="true">
+        <span class="pf-glyph-spin"></span>
+        <svg class="pf-glyph-icon pf-glyph-found" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M8.5 12.5l2.5 2.5 5-5.5" />
+        </svg>
+        <svg class="pf-glyph-icon pf-glyph-missing" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M20 20l-3.2-3.2" />
+          <path d="M9.2 9.2l3.6 3.6" />
+          <path d="M12.8 9.2l-3.6 3.6" />
+        </svg>
+        <svg class="pf-glyph-icon pf-glyph-unknown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M9.4 9.3a2.7 2.7 0 0 1 5.2.8c0 1.8-2.6 2.3-2.6 3.7" />
+          <path d="M12 17h.01" />
+        </svg>
+        <svg class="pf-glyph-icon pf-glyph-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 3h7L18 7.5V21H6.5z" />
+          <path d="M13 3v5h5" />
+          <path d="M9.5 13h5" />
+          <path d="M9.5 16.5h5" />
+        </svg>
+        <svg class="pf-glyph-icon pf-glyph-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M15.5 8.5l-2 5-5 2 2-5z" />
+        </svg>
+        <svg class="pf-glyph-icon pf-glyph-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 4L2.8 20h18.4z" />
+          <path d="M12 10v4" />
+          <path d="M12 17h.01" />
+        </svg>
+        <svg class="pf-glyph-icon pf-glyph-offline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 17.5a4 4 0 0 1-.6-7.96A5.5 5.5 0 0 1 16.6 8a3.9 3.9 0 0 1 1.9 7.3" />
+          <path d="M4 4l16 16" />
+        </svg>
+        <svg class="pf-glyph-icon pf-glyph-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 19a9 9 0 1 1 15 0" />
+          <path d="M12 13.5l3.5-3.5" />
+        </svg>
+      </div>
+      <h1 class="pf-status" id="pf-status" data-i18n="popupReadingPage">Reading page…</h1>
+      <p class="pf-detail" id="pf-detail"></p>
+      <ol class="pf-steps" id="pf-steps" hidden data-i18n-aria="popupStepsAria" aria-label="Resolver progress">
+        <li class="pf-step" data-resolver="unpaywall"><span class="pf-step-dot" aria-hidden="true"></span><span class="pf-step-name">Unpaywall</span></li>
+        <li class="pf-step" data-resolver="openalex"><span class="pf-step-dot" aria-hidden="true"></span><span class="pf-step-name">OpenAlex</span></li>
+        <li class="pf-step" data-resolver="crossref"><span class="pf-step-dot" aria-hidden="true"></span><span class="pf-step-name">Crossref</span></li>
+        <li class="pf-step" data-resolver="arxiv"><span class="pf-step-dot" aria-hidden="true"></span><span class="pf-step-name">arXiv</span></li>
+      </ol>
+    </section>
+
+    <section class="pf-paper" id="pf-paper" hidden>
+      <p class="pf-paper-title" id="pf-paper-title"></p>
+      <p class="pf-paper-meta" id="pf-paper-meta"></p>
+      <code class="pf-paper-doi" id="pf-paper-doi"></code>
+    </section>
+
+    <div class="pf-actions" id="pf-actions" hidden>
+      <button type="button" class="pf-btn pf-btn-block" id="pf-open-again" data-i18n="popupOpenAgain" hidden>Open free copy again</button>
+      <div class="pf-actions-row">
+        <button type="button" class="pf-btn pf-btn-secondary" id="pf-copy-doi" hidden data-i18n-attr="title:proLockedTitle" title="Pro feature">
+          <span class="pf-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg></span>
+          <span data-i18n="popupCopyDoi">Copy DOI</span>
+        </button>
+        <button type="button" class="pf-btn pf-btn-secondary" id="pf-copy-citation" hidden data-i18n-attr="title:proLockedTitle" title="Pro feature">
+          <span class="pf-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg></span>
+          <span data-i18n="popupCopyCitation">Copy citation</span>
+        </button>
+      </div>
+      <button type="button" class="pf-btn pf-btn-ghost" id="pf-check-again" data-i18n="popupCheckAgain" hidden>Check again</button>
+      <button type="button" class="pf-btn pf-btn-secondary" id="pf-auto-detect" hidden data-i18n-attr="title:proLockedTitle" title="Pro feature">
+        <span class="pf-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg></span>
+        <span data-i18n="popupAutoDetect">Enable auto-detect on this site</span>
+      </button>
+    </div>
+
+    <section class="pf-pro-teaser" id="pf-pro-teaser" hidden>
+      <span class="pf-pro-teaser-lock" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></svg>
+      </span>
+      <p class="pf-pro-teaser-text" data-i18n="popupProTeaser">Pro adds unlimited lookups, site auto-detect, and one-click copy.</p>
+    </section>
+
+    <div class="pf-upsell" id="pf-upsell" hidden>
+      <p class="pf-upsell-copy" id="pf-upsell-copy"></p>
+      <p class="pf-upsell-price" data-i18n="popupProPrice">Pro · $4.99 a month or $99 once</p>
+      <div class="pf-upsell-actions">
+        <button type="button" class="pf-btn pf-btn-pro" id="pf-upgrade" data-i18n="popupUpgrade">Upgrade</button>
+        <button type="button" class="pf-btn pf-btn-ghost" id="pf-maybe-later" data-i18n="popupMaybeLater">Maybe later</button>
+      </div>
+    </div>
+
+    <section class="pf-recent" id="pf-recent" hidden aria-labelledby="pf-recent-title">
+      <h2 class="pf-eyebrow" id="pf-recent-title" data-i18n="popupRecentTitle">Recent papers</h2>
+      <ul class="pf-recent-list" id="pf-recent-list"></ul>
+    </section>
+
+    <div class="pf-util">
+      <div class="pf-util-meter">
+        <p class="pf-counter" id="pf-counter"></p>
+        <div class="pf-meter" id="pf-meter" hidden aria-hidden="true"><span class="pf-meter-fill" id="pf-meter-fill"></span></div>
+      </div>
+      <a class="pf-library-link" id="pf-library-link" href="options.html" data-i18n="popupOpenLibrary">Library</a>
+    </div>
+  </main>
+
+  <footer class="pf-footer">
+    <a class="pf-footer-link" href="https://zovo.one" target="_blank" rel="noopener" data-i18n="footerHome">zovo.one</a>
+  </footer>
+
+  <template id="pf-tpl-recent">
+    <li class="pf-recent-item">
+      <span class="pf-recent-dot" aria-hidden="true"></span>
+      <span class="pf-recent-name"></span>
+    </li>
+  </template>
+
+  <link rel="stylesheet" href="membership/popup.css">
+    <script src="membership/eligibility.js"></script>
+    <script src="membership/popup.js"></script>
+    <script src="popup.js"></script>
+<script src="zovo150k.js"></script>
+</body>
+</html>
